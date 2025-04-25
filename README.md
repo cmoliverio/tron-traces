@@ -4,7 +4,10 @@
 
 ## Requirements
 
-// TODO
+```
+- KDE Desktop
+- Qt6
+```
 
 ## Quick Start
 

@@ -2,12 +2,12 @@
 #include <QQmlEngine>
 #include <QtQml>
 
-static QObject *gol_singletontype_provider(QQmlEngine *, QJSEngine *) {
-    return new GolPlugin();
+static QObject *tron_traces_singletontype_provider(QQmlEngine *, QJSEngine *) {
+    return new TRONTraces();
 }
 
-void register_gol_plugin() {
-    qmlRegisterSingletonType<GolPlugin>("Gol", 1, 0, "Gol", gol_singletontype_provider);
+void register_tron_traces_plugin() {
+    qmlRegisterSingletonType<TRONTraces>("TRON Traces", 1, 0, "Gol", tron_traces_singletontype_provider);
 }
 
-Q_COREAPP_STARTUP_FUNCTION(register_gol_plugin)
+Q_COREAPP_STARTUP_FUNCTION(register_tron_traces_plugin)
