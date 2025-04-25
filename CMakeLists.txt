@@ -14,7 +14,6 @@ include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(FeatureSummary)
 
-
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
     Qml
@@ -31,11 +30,10 @@ find_package(KF6 COMPONENTS
 find_package(Plasma REQUIRED)
 find_package(PlasmaQuick REQUIRED)
 
-#find_package(KF6 ${KF6_MIN_VERSION} REQUIRED
-#    Plasma
-#    PlasmaQuick
-#)
-
 add_subdirectory(src)
 
-install(DIRECTORY package/ DESTINATION ${KDE_INSTALL_DATADIR}/plasma/wallpapers/trontraces)
+# install(DIRECTORY build/package/ DESTINATION ${PLASMA_DATA_INSTALL_DIR}/wallpapers/org.kde.plasma.trontraces)
+
+install(DIRECTORY package/ DESTINATION ${PLASMA_DATA_INSTALL_DIR}/wallpapers/org.kde.plasma.tron_traces)
+
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
