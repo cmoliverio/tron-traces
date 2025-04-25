@@ -1,15 +1,20 @@
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15
+import QtQuick
+import QtQuick.Layouts
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.wallpapers.tron_traces 1.0
 
-Item {
-    width: 1920
-    height: 1080
-
+Rectangle {
+    id: root
+    color: "black"
+    
+    TRONTraces {
+        id: tronTraces
+    }
+    
     Text {
         anchors.centerIn: parent
-        text: Gol.helloWorld()
-        font.pixelSize: 48
+        text: tronTraces.helloWorld()
         color: "white"
+        font.pixelSize: 24
     }
 }

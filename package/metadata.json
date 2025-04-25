@@ -9,11 +9,12 @@
         ],
         "Description": "Procedurally generates a grid similar to the into in TRON: Legacy",
         "Icon": "plasma",
-        "Id": "org.kde.plasma.trontraces",
+        "Id": "org.kde.plasma.tron_traces",
         "License": "MIT",
         "Name": "TRON Traces",
         "Version": "0.0.0",
         "Website": "https://plasma.kde.org/"
     },
-    "X-KDE-ParentApp": "org.kde.plasmashell"
+    "X-KDE-ParentApp": "org.kde.plasmashell",
+    "X-Plasma-MainScript": "ui/main.qml"
 }

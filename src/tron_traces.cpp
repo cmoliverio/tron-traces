@@ -7,7 +7,14 @@ static QObject *tron_traces_singletontype_provider(QQmlEngine *, QJSEngine *) {
 }
 
 void register_tron_traces_plugin() {
-    qmlRegisterSingletonType<TRONTraces>("TRON Traces", 1, 0, "Gol", tron_traces_singletontype_provider);
+    qmlRegisterSingletonType<TRONTraces>(
+        "org.kde.plasma.wallpapers.tron_traces", 
+        1, 
+        0, 
+        "TRONTraces", 
+        tron_traces_singletontype_provider
+    );
+    
 }
 
 Q_COREAPP_STARTUP_FUNCTION(register_tron_traces_plugin)
