@@ -43,3 +43,16 @@ Error loading the wallpaper QList(file:///usr/share/plasma/wallpapers/org.kde.pl
 kf.plasma.quick: "file:///usr/share/plasma/wallpapers/org.kde.plasma.tron_traces/contents/ui/main.qml" 
  "Error loading QML file.\n4: Failed to extract plugin meta data from '/usr/lib/qt6/qml/org/kde/plasma/wallpapers/tron_traces/libtron_traces.so': '/usr/lib/qt6/qml/org/kde/plasma/wallpapers/tron_traces/libtron_traces.so' is not a Qt plugin (metadata not found)\n"
 ```
+
+Root item in `main.qml` must be `WallpaperItem`
+Need to import a bunch of Plasma stuff, e.g. the following for that to work: 
+```
+mport org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.wallpapers.image 2.0 as Wallpaper
+import org.kde.plasma.plasmoid
+```
+Not built in type.
+
+
+
+`libtron_traces.so` must be installed at `/usr/lib/qt6/qml/org/kde/plasma/wallpapers/tron_traces/`
