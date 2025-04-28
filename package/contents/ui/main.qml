@@ -1,20 +1,16 @@
-import QtQuick
-import QtQuick.Layouts
-import org.kde.plasma.core as PlasmaCore
+import QtQuick 2.15
+
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.wallpapers.image 2.0 as Wallpaper
+import org.kde.plasma.plasmoid
+
 import org.kde.plasma.wallpapers.tron_traces 1.0
 
-Rectangle {
+WallpaperItem {
     id: root
-    color: "black"
-    
-    TRONTraces {
-        id: tronTraces
-    }
-    
-    Text {
-        anchors.centerIn: parent
-        text: tronTraces.helloWorld()
-        color: "white"
-        font.pixelSize: 24
+    anchors.fill: parent
+
+    TronRendererItem {
+        anchors.fill: parent
     }
 }
