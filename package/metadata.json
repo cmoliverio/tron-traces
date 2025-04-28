@@ -13,8 +13,9 @@
         "License": "MIT",
         "Name": "TRON Traces",
         "Version": "0.0.0",
-        "Website": "https://plasma.kde.org/"
+        "Website": "https://github.com/cmoliverio/tron-traces"
     },
     "X-KDE-ParentApp": "org.kde.plasmashell",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "X-Plasma-MainScript": "ui/main.qml",
+    "X-Plasma-API-Minimum-Version": "6.0"
 }
