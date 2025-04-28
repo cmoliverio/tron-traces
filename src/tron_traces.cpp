@@ -12,32 +12,38 @@ public:
     TronRendererObject() {
         m_renderer = new TronGridRenderer();
         m_renderer->initialize();
+        m_timer.start();
     }
     
     ~TronRendererObject() {
         delete m_renderer;
     }
-    
+
     void render() override {
-        // Clear the framebuffer
+        // Calculate time since last frame
+        qreal elapsed = m_timer.elapsed() / 1000.0;
+        m_timer.restart();
+
         QOpenGLFramebufferObject *fbo = framebufferObject();
         m_renderer->render(fbo);
-    }
-    
-    void synchronize(QQuickFramebufferObject *item) override {
+        
         // Update animation state
-        m_renderer->update(m_deltaTime);
+        m_renderer->update(elapsed);
+        
+        // Request another frame
+        update();  // This is crucial - it tells Qt to call render() again
     }
     
-    QOpenGLFramebufferObject *createFramebufferObject(const QSize &size) override {
-        QOpenGLFramebufferObjectFormat format;
-        format.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
-        return new QOpenGLFramebufferObject(size, format);
-    }
+    // void render() override {
+    //     // Clear the framebuffer
+    //     QOpenGLFramebufferObject *fbo = framebufferObject();
+    //     m_renderer->render(fbo);
+    // }
     
 private:
     TronGridRenderer *m_renderer;
     qreal m_deltaTime = 0.016; // ~60fps
+    QElapsedTimer m_timer;
 };
 
 QQuickFramebufferObject::Renderer *TronRendererItem::createRenderer() const {
@@ -112,7 +118,7 @@ void TronGridRenderer::render(QOpenGLFramebufferObject *fbo) {
     
     glEnd();
 
-    qDebug() << "Drawing grid...";
+    // qDebug() << "Drawing grid...";
     
     // Disable blending
     glDisable(GL_BLEND);
@@ -121,8 +127,5 @@ void TronGridRenderer::render(QOpenGLFramebufferObject *fbo) {
 }
 
 void TronGridRenderer::update(qreal deltaTime) {
-    // Update animation state
-    // In a full implementation:
-    // 1. Update line positions
-    // 2. Update any other animated elements
+    qDebug() << "In update func";
 }
