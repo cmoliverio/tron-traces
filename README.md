@@ -54,5 +54,13 @@ import org.kde.plasma.plasmoid
 Not built in type.
 
 
-
 `libtron_traces.so` must be installed at `/usr/lib/qt6/qml/org/kde/plasma/wallpapers/tron_traces/`
+
+#### Workflow
+
+1. `./from-scratch.sh` or `make -C build`
+2. `sudo ./install_lib.sh`
+3. `./restart-plasma.sh`
+
+__One liner for deploy and test__: `make -C build && sudo ./install_lib.sh && ./restart-plasma.sh`
+
