@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 project(plasma-wallpaper-tron-traces)
 
+set(CMAKE_INSTALL_MESSAGE NEVER)
+
 set(CMAKE_CXX_STANDARD 17)
 
 set(QT_MIN_VERSION "6.4.0")
@@ -34,6 +36,6 @@ find_package(PlasmaQuick REQUIRED)
 
 add_subdirectory(src)
 
-install(DIRECTORY package/ DESTINATION /usr/share/wallpapers/org.kde.plasma.tron_traces)
+install(DIRECTORY package/ DESTINATION /usr/share/plasma/wallpapers/org.kde.plasma.tron_traces)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

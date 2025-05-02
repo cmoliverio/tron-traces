@@ -89,7 +89,7 @@ void TronGridRenderer::render(QOpenGLFramebufferObject *fbo) {
     fbo->bind();
     
     // Set up OpenGL state
-    glClearColor(0.7f, 0.7f, 0.0f, 1.0f); // Dark blue background - TRON-like
+    glClearColor(0.1f, 0.5f, 0.7f, 1.0f); // Dark blue background - TRON-like
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     // Enable blending for the glow effect
@@ -127,5 +127,6 @@ void TronGridRenderer::render(QOpenGLFramebufferObject *fbo) {
 }
 
 void TronGridRenderer::update(qreal deltaTime) {
-    qDebug() << "In update func";
+    deltaTime += 0;
+    // qDebug() << "In update func";
 }

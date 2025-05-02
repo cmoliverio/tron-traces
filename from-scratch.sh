@@ -1,7 +1,7 @@
 #!/bin/sh
 
-rm -rf build
+rm -rf build lib/*
 
 cmake -B build . -DCMAKE_INSTALL_PREFIX=$(qtpaths --install-prefix)
 
-make -B -C build
+make -s -B -C build
