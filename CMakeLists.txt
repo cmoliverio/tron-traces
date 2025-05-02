@@ -34,6 +34,6 @@ find_package(PlasmaQuick REQUIRED)
 
 add_subdirectory(src)
 
-install(DIRECTORY package/ DESTINATION ${PLASMA_DATA_INSTALL_DIR}/wallpapers/org.kde.plasma.tron_traces)
+install(DIRECTORY package/ DESTINATION /usr/share/wallpapers/org.kde.plasma.tron_traces)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

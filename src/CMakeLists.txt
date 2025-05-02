@@ -21,4 +21,21 @@ set_target_properties(libtron_traces PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
 )
 
-install(TARGETS libtron_traces DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/wallpapers/tron_traces)
+set(INSTALL_DIR /usr/lib/qt6/qml/org/kde/plasma/wallpapers/tron_traces)
+
+# install the lib
+install(
+    TARGETS 
+        libtron_traces 
+    DESTINATION 
+        ${INSTALL_DIR}
+)
+
+# install the other Qt files needed
+install(
+    FILES 
+        tron_traces.json 
+        qmldir 
+    DESTINATION 
+        ${INSTALL_DIR}
+)
