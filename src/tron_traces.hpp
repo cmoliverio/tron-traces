@@ -10,7 +10,7 @@ class TronGridRenderer : public QObject, protected QOpenGLFunctions {
 public:
     explicit TronGridRenderer(QObject *parent = nullptr);
     void initialize();
-    void render(QOpenGLFramebufferObject *fbo);
+    void grid_render(QOpenGLFramebufferObject *fbo);
     void update(qreal deltaTime);
     
 private:
