@@ -4,8 +4,6 @@
 #include <QObject>
 #include <QQmlExtensionPlugin>
 
-#include "tron_traces.hpp"
-
 class TronTracesPlugin : public QQmlExtensionPlugin {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
