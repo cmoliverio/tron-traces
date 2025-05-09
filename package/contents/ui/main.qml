@@ -10,7 +10,7 @@ WallpaperItem {
     id: root
     anchors.fill: parent
 
-    TronTracesItem {
+    TronTraces {
         anchors.fill: parent
     }
 }

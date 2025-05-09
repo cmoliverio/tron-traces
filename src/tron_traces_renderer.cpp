@@ -30,7 +30,7 @@ void TronTracesRenderer::render() {
     // qreal elapsed = m_timer.elapsed() / 1000.0;
     // m_timer.restart();
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
     // qDebug() << "I am updating now!";
     // QOpenGLFramebufferObject *fbo = framebufferObject();
