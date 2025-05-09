@@ -7,9 +7,7 @@
 class TronTraces : public QQuickFramebufferObject {
     Q_OBJECT
 public:
-    TronTraces(){};
-    ~TronTraces(){};
-    Renderer *createRenderer() const override;
+    QQuickFramebufferObject::Renderer *createRenderer() const override;
 };
 
 #endif // TRON_TRACES_H

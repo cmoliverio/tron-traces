@@ -25,11 +25,11 @@ private:
 //     Renderer *createRenderer() const override;
 // };
 
-// class TronTracesPlugin : public QQmlExtensionPlugin {
-//     Q_OBJECT
-//     Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
-// public:
-//     void registerTypes(const char *uri) override {
-//         qmlRegisterType<TronRendererItem>(uri, 1, 0, "TronRendererItem");
-//     }
-// };
+class TronTracesPlugin : public QQmlExtensionPlugin {
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
+public:
+    void registerTypes(const char *uri) override {
+        qmlRegisterType<TronRendererItem>(uri, 1, 0, "TronRendererItem");
+    }
+};

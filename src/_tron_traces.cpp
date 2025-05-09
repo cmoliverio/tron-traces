@@ -42,38 +42,8 @@ public:
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
         qDebug() << "I am updating now!";
-        // QOpenGLFramebufferObject *fbo = framebufferObject();
-        // m_renderer->grid_render(fbo);
-        // m_renderer->update(0);
-
-        // qDebug() << "I am updating now!\n";
-
-        // QOpenGLFramebufferObject *fbo = framebufferObject();
-        // m_renderer->grid_render(fbo);
-        // m_renderer->update(0);
         
     }
-    // TronRendererObject() {
-    //     m_renderer = new TronGridRenderer();
-    //     m_renderer->initialize();
-    // }
-    
-    // ~TronRendererObject() {
-    //     m_frameTimer->stop();
-    //     delete m_frameTimer;
-    //     delete m_renderer;
-    // }
-
-    // void render() override {
-    //     qreal elapsed = m_timer.elapsed() / 1000.0;
-    //     m_timer.restart();
-
-    //     QOpenGLFramebufferObject *fbo = framebufferObject();
-    //     m_renderer->render(fbo);
-    //     m_renderer->update(elapsed);
-
-    //     std::this_thread::sleep_for(std::chrono::milliseconds(16));
-    // }
     
 private:
     TronGridRenderer *m_renderer;
@@ -81,9 +51,9 @@ private:
     QTimer *m_frameTimer;
 };
 
-QQuickFramebufferObject::Renderer *TronRendererItem::createRenderer() const {
-    return new TronRendererObject();
-}
+// QQuickFramebufferObject::Renderer *TronRendererItem::createRenderer() const {
+//     return new TronRendererObject();
+// }
 
 // Implementation of TronGridRenderer
 TronGridRenderer::TronGridRenderer(QObject *parent) : QObject(parent) {
