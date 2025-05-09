@@ -5,18 +5,6 @@
   <kcfgfile name=""/>
 
   <group name="General">
-      <!-- <entry name="start_branches" type="Int">
-            <label>Start Branches</label>
-            <default>3</default>
-        </entry>
-      <entry name="scale" type="Int">
-            <label>Scale</label>
-            <default>3</default>
-        </entry>
-      <entry name="checkedSmartPlay" type="bool">
-        <label>Pause the video when existing a maximized or full-screen windows.</label>
-        <default>false</default>
-    </entry> -->
   </group>
   
 </kcfg>

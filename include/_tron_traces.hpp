@@ -19,17 +19,17 @@ private:
     // ... other OpenGL resources
 };
 
-class TronRendererItem : public QQuickFramebufferObject {
-    Q_OBJECT
-public:
-    Renderer *createRenderer() const override;
-};
+// class TronTraces : public QQuickFramebufferObject {
+//     Q_OBJECT
+// public:
+//     Renderer *createRenderer() const override;
+// };
 
-class TronTracesPlugin : public QQmlExtensionPlugin {
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
-public:
-    void registerTypes(const char *uri) override {
-        qmlRegisterType<TronRendererItem>(uri, 1, 0, "TronRendererItem");
-    }
-};
+// class TronTracesPlugin : public QQmlExtensionPlugin {
+//     Q_OBJECT
+//     Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
+// public:
+//     void registerTypes(const char *uri) override {
+//         qmlRegisterType<TronRendererItem>(uri, 1, 0, "TronRendererItem");
+//     }
+// };

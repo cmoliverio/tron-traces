@@ -1,5 +1,11 @@
 add_library(libtron_traces SHARED MODULE
+    tron_traces_plugin.cpp
     tron_traces.cpp
+)
+
+include_directories(libtron_traces 
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/include
 )
 
 target_link_libraries(libtron_traces
