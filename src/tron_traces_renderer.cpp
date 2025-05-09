@@ -1,21 +1,23 @@
-#include <chrono>
-#include <thread>
 #include "tron_traces_renderer.hpp"
 
 
 TronTracesRenderer::TronTracesRenderer() {
-    // m_renderer = new TronGridRenderer();
-    // m_renderer->initialize();
-    qDebug() << "I'm initalizing!";
-
-    // m_timer.start();
-
-    // m_frameTimer = new QTimer();
-    // m_frameTimer->setInterval(100); // ~60 FPS
-    // QObject::connect(m_frameTimer, &QTimer::timeout, [this]() {
-    //     update();  // <--- THIS is the correct way to trigger redraws
-    // });
-    // m_frameTimer->start();
+    qDebug() << "I'm initializing!";
+    
+    // starts the timer
+    m_timer.start();
+    
+    // timer to trigger redraws
+    m_frameTimer = new QTimer();
+    m_frameTimer->setInterval(16); // in milliseconds
+    
+    // Connect the timer to trigger updates
+    QObject::connect(m_frameTimer, &QTimer::timeout, [this]() {
+        update(); // requests the render() function to be called
+    });
+    
+    // Start the timer
+    m_frameTimer->start();
 }
 
 TronTracesRenderer::~TronTracesRenderer() {
@@ -24,23 +26,13 @@ TronTracesRenderer::~TronTracesRenderer() {
 }
 
 void TronTracesRenderer::render() {
+    // Calculate time since last render
+    qint64 currentTime = m_renderTimer.elapsed();
+    qint64 timeSinceLastRender = currentTime - m_lastRenderTime;
 
-    qDebug() << "Holy crap im RENdering";
-    
-    // qreal elapsed = m_timer.elapsed() / 1000.0;
-    // m_timer.restart();
+    // qDebug() << "Time since last render:" << timeSinceLastRender << "ms";
+    // qDebug() << "Holy crap I'm RENdering";
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-
-    // qDebug() << "I am updating now!";
-    // QOpenGLFramebufferObject *fbo = framebufferObject();
-    // m_renderer->grid_render(fbo);
-    // m_renderer->update(0);
-
-    // qDebug() << "I am updating now!\n";
-
-    // QOpenGLFramebufferObject *fbo = framebufferObject();
-    // m_renderer->grid_render(fbo);
-    // m_renderer->update(0);
-    
+    // Update last render time
+    m_lastRenderTime = currentTime;
 }
