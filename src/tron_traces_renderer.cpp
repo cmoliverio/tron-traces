@@ -1,6 +1,5 @@
 #include "tron_traces_renderer.hpp"
 
-
 TronTracesRenderer::TronTracesRenderer() {
     qDebug() << "I'm initializing!";
     
