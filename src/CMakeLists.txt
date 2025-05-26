@@ -30,9 +30,10 @@ target_link_libraries(libtron_traces
         KF6::WindowSystem
         Plasma
         PlasmaQuick
-    PRIVATE 
-        OpenGL::GL 
-        OpenGL::GLU
+    # PRIVATE 
+    #     OpenGL::GL 
+    #     OpenGL::GLU
+        # GLEW::GLEW
 )
 
 set_target_properties(libtron_traces PROPERTIES

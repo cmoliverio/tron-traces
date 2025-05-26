@@ -29,6 +29,8 @@ find_package(KF6 COMPONENTS
     REQUIRED
 )
 
+find_package(GLEW REQUIRED)
+
 find_package(OpenGL REQUIRED)
 
 find_package(Plasma REQUIRED)

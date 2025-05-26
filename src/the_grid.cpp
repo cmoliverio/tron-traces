@@ -3,76 +3,69 @@
 #include <QMatrix4x4>
 #include <QVector3D>
 
-TheGrid::TheGrid(QObject *parent) : QObject(parent) {}
+TheGrid::TheGrid(QWidget *parent) : QOpenGLWidget(parent), vbo(QOpenGLBuffer::VertexBuffer) {}
 
-void TheGrid::initialize() {
+TheGrid::~TheGrid() {}
+
+float points[] = {
+    0.0f,  0.5f,  0.0f,
+    0.5f, -0.5f,  0.0f,
+   -0.5f, -0.5f,  0.0f
+ };
+
+void TheGrid::initializeGL()
+{
     initializeOpenGLFunctions();
-    
-    // Enable depth testing
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
-    
-    // Set up viewport and camera
-    glViewport(0, 0, 800, 600);
 
-    // Create projection matrix
-    QMatrix4x4 projection;
-    projection.perspective(45.0f, 800.0f/600.0f, 0.1f, 100.0f);
-    
-    // Create view matrix
-    QMatrix4x4 view;
-    view.lookAt(QVector3D(0.0f, 10.0f, 15.0f),  // Camera position
-                QVector3D(0.0f, 0.0f, 0.0f),    // Look at point
-                QVector3D(0.0f, 1.0f, 0.0f));   // Up vector
-    
-    // Load matrices
-    glMatrixMode(GL_PROJECTION);
-    glLoadMatrixf(projection.constData());
-    
-    glMatrixMode(GL_MODELVIEW);
-    glLoadMatrixf(view.constData());
+    GLfloat vertices[] = {
+        0.0f,  0.5f, 0.0f, // Top vertex
+        -0.5f, -0.5f, 0.0f, // Bottom left vertex
+        0.5f, -0.5f, 0.0f  // Bottom right vertex
+    };
 
-    qDebug() << "Initialize complete";
+    vbo.create();
+    vbo.bind();
+    vbo.allocate(vertices, sizeof(vertices));
+    shaderProgram = new QOpenGLShaderProgram();
+    shaderProgram->addShaderFromSourceCode(QOpenGLShader::Vertex,
+                                        "#version 330 core\n"
+                                        "layout(location = 0) in vec3 position;\n"
+                                        "void main()\n"
+                                        "{\n"
+                                        "    gl_Position = vec4(position, 1.0);\n"
+                                        "}\n"
+                                        );
+    shaderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment,
+                                        "#version 330 core\n"
+                                        "out vec4 fragColor;\n"
+                                        "void main()\n"
+                                        "{\n"
+                                        "    fragColor = vec4(1.0, 0.0, 0.0, 1.0);\n"
+                                        "}\n"
+                                        );
+    shaderProgram->link();
+    shaderProgram->bind();
 }
 
-void TheGrid::render(QOpenGLFramebufferObject *fbo) {
-    // Make sure we're rendering to the correct framebuffer
-    fbo->bind();
-    
-    // Set up OpenGL state
-    glClearColor(0.7f, 0.7f, 0.0f, 1.0f); // Dark blue background - TRON-like
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
-    // Enable blending for the glow effect
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    
-    // Draw a simple grid
-    glBegin(GL_LINES);
-    
-    // Set color for grid lines - TRON cyan color
-    glColor4f(0.0f, 0.7f, 0.f, 0.1f);
-    
-    // Draw horizontal grid lines
-    // float gridSize = 1.0f;
-    // int gridCount = 20;
-    // for (int i = -gridCount; i <= gridCount; i++) {
-    //     glVertex3f(-gridCount * gridSize, 0.0f, i * gridSize);
-    //     glVertex3f(gridCount * gridSize, 0.0f, i * gridSize);
-    // }
-    
-    // // Draw vertical grid lines
-    // for (int i = -gridCount; i <= gridCount; i++) {
-    //     glVertex3f(i * gridSize, 0.0f, -gridCount * gridSize);
-    //     glVertex3f(i * gridSize, 0.0f, gridCount * gridSize);
-    // }
-    
-    glEnd();
+void TheGrid::resizeGL(int w, int h)
+{
+    glViewport(0, 0, w, h);
+}
 
-    // qDebug() << "Drawing grid...";
-    
-    // Disable blending
-    glDisable(GL_BLEND);
-    
-    fbo->release();
+void TheGrid::paintGL()
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    shaderProgram->bind();
+    vbo.bind();
+
+    int posLocation = shaderProgram->attributeLocation("position");
+    shaderProgram->enableAttributeArray(posLocation);
+    shaderProgram->setAttributeBuffer(posLocation, GL_FLOAT, 0, 3);
+
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+
+    shaderProgram->disableAttributeArray(posLocation);
+    vbo.release();
+    shaderProgram->release();
 }

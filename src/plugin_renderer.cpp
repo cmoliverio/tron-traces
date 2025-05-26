@@ -4,14 +4,14 @@ PluginRenderer::PluginRenderer() {
     qDebug() << "I'm initializing!";
 
     the_grid = new TheGrid();
-    the_grid->initialize();
+    the_grid->initializeGL();
     
     // starts the timer
     m_timer.start();
     
     // timer to trigger redraws
     m_frameTimer = new QTimer();
-    m_frameTimer->setInterval(100); // in milliseconds
+    m_frameTimer->setInterval(300); // in milliseconds
     
     // Connect the timer to trigger updates
     QObject::connect(m_frameTimer, &QTimer::timeout, [this]() {
@@ -36,7 +36,7 @@ void PluginRenderer::render() {
     qDebug() << "Holy crap I'm RENdering";
 
     QOpenGLFramebufferObject *fbo = framebufferObject();
-    the_grid->render(fbo);
+    the_grid->paintGL(fbo);
 
     // Update last render time
     m_lastRenderTime = currentTime;
