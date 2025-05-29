@@ -20,6 +20,9 @@ find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
     Qml
     Quick
+    Widgets
+    OpenGL
+    OpenGLWidgets
 )
 
 find_package(KF6 COMPONENTS
@@ -29,9 +32,9 @@ find_package(KF6 COMPONENTS
     REQUIRED
 )
 
-find_package(GLEW REQUIRED)
+# find_package(GLEW REQUIRED)
 
-find_package(OpenGL REQUIRED)
+# find_package(OpenGL REQUIRED)
 
 find_package(Plasma REQUIRED)
 find_package(PlasmaQuick REQUIRED)

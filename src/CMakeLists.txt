@@ -21,15 +21,16 @@ target_include_directories(libtron_traces
 )
 
 target_link_libraries(libtron_traces
-    PUBLIC
-        Qt6::Core
-        Qt6::Quick
-        Qt6::Qml
-        KF6::ConfigCore
-        KF6::CoreAddons
-        KF6::WindowSystem
-        Plasma
-        PlasmaQuick
+    Qt6::Core
+    Qt6::Quick
+    Qt6::Qml
+    Qt6::OpenGL
+    Qt6::OpenGLWidgets
+    KF6::ConfigCore
+    KF6::CoreAddons
+    KF6::WindowSystem
+    Plasma
+    PlasmaQuick
     # PRIVATE 
     #     OpenGL::GL 
     #     OpenGL::GLU

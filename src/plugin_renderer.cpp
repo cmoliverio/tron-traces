@@ -11,7 +11,7 @@ PluginRenderer::PluginRenderer() {
     
     // timer to trigger redraws
     m_frameTimer = new QTimer();
-    m_frameTimer->setInterval(300); // in milliseconds
+    m_frameTimer->setInterval(500); // in milliseconds
     
     // Connect the timer to trigger updates
     QObject::connect(m_frameTimer, &QTimer::timeout, [this]() {
@@ -35,8 +35,9 @@ void PluginRenderer::render() {
     qDebug() << "Time since last render:" << timeSinceLastRender << "ms";
     qDebug() << "Holy crap I'm RENdering";
 
-    QOpenGLFramebufferObject *fbo = framebufferObject();
-    the_grid->paintGL(fbo);
+    // QOpenGLFramebufferObject *fbo = framebufferObject();
+    // the_grid->paintGL(fbo);
+    the_grid->paintGL();
 
     // Update last render time
     m_lastRenderTime = currentTime;

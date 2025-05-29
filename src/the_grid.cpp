@@ -18,7 +18,7 @@ void TheGrid::initializeGL()
     initializeOpenGLFunctions();
 
     GLfloat vertices[] = {
-        0.0f,  0.5f, 0.0f, // Top vertex
+        0.0f,  0.5f, 1.0f, // Top vertex
         -0.5f, -0.5f, 0.0f, // Bottom left vertex
         0.5f, -0.5f, 0.0f  // Bottom right vertex
     };
