@@ -1,6 +1,51 @@
 #include "plugin_renderer.hpp"
 
+#include <QCoreApplication>
+#include <QDBusInterface>
+#include <QDBusReply>
+#include <QDebug>
+
 PluginRenderer::PluginRenderer() {
+
+
+    // QDBusInterface iface("org.kde.kscreen",
+    //                      "/backend",
+    //                      "org.kde.kscreen.Backend",
+    //                      QDBusConnection::sessionBus());
+
+    // if (!iface.isValid()) {
+    //     qWarning() << "KScreen DBus interface is not valid!";
+    //     return 1;
+    // }
+
+    // QDBusReply<QVariantMap> reply = iface.call("config");
+    // if (!reply.isValid()) {
+    //     qWarning() << "Failed to get screen config:" << reply.error().message();
+    //     return 1;
+    // }
+
+    // QVariantMap config = reply.value();
+    // QVariantList outputs = config["outputs"].toList();
+
+    // for (const QVariant &outputVar : outputs) {
+    //     QVariantMap output = outputVar.toMap();
+    //     QString name = output["name"].toString();
+    //     bool connected = output["connected"].toBool();
+    //     bool enabled = output["enabled"].toBool();
+
+    //     if (!connected || !enabled) continue;
+
+    //     QVariantMap currentMode = output["currentMode"].toMap();
+    //     int width = currentMode["width"].toInt();
+    //     int height = currentMode["height"].toInt();
+    //     double refresh = currentMode["refresh"].toDouble();
+
+    //     qDebug() << "Monitor:" << name;
+    //     qDebug() << "  Resolution:" << width << "x" << height;
+    //     qDebug() << "  Refresh rate:" << refresh << "Hz";
+    // }
+
+
     qDebug() << "I'm initializing!";
 
     the_grid = new TheGrid();
@@ -11,7 +56,7 @@ PluginRenderer::PluginRenderer() {
     
     // timer to trigger redraws
     m_frameTimer = new QTimer();
-    m_frameTimer->setInterval(500); // in milliseconds
+    m_frameTimer->setInterval(16); // in milliseconds
     
     // Connect the timer to trigger updates
     QObject::connect(m_frameTimer, &QTimer::timeout, [this]() {

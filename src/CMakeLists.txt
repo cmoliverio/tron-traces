@@ -24,6 +24,7 @@ target_link_libraries(libtron_traces
     Qt6::Core
     Qt6::Quick
     Qt6::Qml
+    Qt6::DBus
     Qt6::OpenGL
     Qt6::OpenGLWidgets
     KF6::ConfigCore
@@ -31,10 +32,6 @@ target_link_libraries(libtron_traces
     KF6::WindowSystem
     Plasma
     PlasmaQuick
-    # PRIVATE 
-    #     OpenGL::GL 
-    #     OpenGL::GLU
-        # GLEW::GLEW
 )
 
 set_target_properties(libtron_traces PROPERTIES
