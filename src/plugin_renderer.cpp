@@ -29,16 +29,17 @@ PluginRenderer::~PluginRenderer() {
 
 void PluginRenderer::render() {
     // Calculate time since last render
-    qint64 currentTime = m_renderTimer.elapsed();
-    qint64 timeSinceLastRender = currentTime - m_lastRenderTime;
+    // qint64 currentTime = m_renderTimer.elapsed();
+    // qint64 timeSinceLastRender = currentTime - m_lastRenderTime;
 
-    qDebug() << "Time since last render:" << timeSinceLastRender << "ms";
-    qDebug() << "Holy crap I'm RENdering";
+    // qDebug() << "Time since last render:" << timeSinceLastRender << "ms";
+    // qDebug() << "Holy crap I'm RENdering";
 
     // QOpenGLFramebufferObject *fbo = framebufferObject();
     // the_grid->paintGL(fbo);
+    the_grid->resizeGL(2560, 1440);
     the_grid->paintGL();
 
     // Update last render time
-    m_lastRenderTime = currentTime;
+    // m_lastRenderTime = currentTime;
 }

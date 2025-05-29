@@ -23,6 +23,7 @@ public:
 private:
     QOpenGLBuffer vbo;
     QOpenGLShaderProgram *shaderProgram;
+    QMatrix4x4 projectionMatrix;
 };
 
 #endif // THE_GRID_H
