@@ -13,11 +13,23 @@ GLfloat vertices[] = {
         0.577f, -0.5f, 0.0f  // Bottom right vertex
 };
 
+void TheGrid::initialize_light_cycles()
+{
+    this->trails = std::make_unique<std::vector<std::unique_ptr<LightTrail>>>();
+    
+    // Method 1: Using make_unique (recommended)
+    this->trails->push_back(
+        std::make_unique<LightTrail>(Point{0.0f, 0.1f, 0.5f}, Direction::RIGHT)
+    );
+    this->trails->back()->move();
+}
+
 void TheGrid::initializeGL()
 {
+    initialize_light_cycles();
     initializeOpenGLFunctions();
 
-    glEnable(GL_DEPTH_TEST);
+    // glEnable(GL_DEPTH_TEST);
 
     GLfloat vertices[] = {
         0.0f,  0.5f, 0.0f, // Top vertex
@@ -31,30 +43,32 @@ void TheGrid::initializeGL()
     shaderProgram = new QOpenGLShaderProgram();
 
     shaderProgram->addShaderFromSourceCode(QOpenGLShader::Vertex,
-                                        "#version 330 core\n"
-                                        "layout(location = 0) in vec3 position;\n"
-                                        "uniform mat4 model;\n"
-                                        "uniform mat4 view;\n"
-                                        "uniform mat4 projection;\n"
-                                        "void main()\n"
-                                        "{\n"
-                                        "    gl_Position = projection * view * model * vec4(position.x, -position.y, position.z, 1.0);\n"
-                                        "}\n"
-                                        );
+        "#version 330 core\n"
+        "layout(location = 0) in vec3 position;\n"
+        "uniform mat4 model;\n"
+        "uniform mat4 view;\n"
+        "uniform mat4 projection;\n"
+        "void main()\n"
+        "{\n"
+        "    gl_Position = projection * view * model * vec4(position.x, -position.y, position.z, 1.0);\n"
+        "}\n"
+        );
     shaderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment,
-                                        "#version 330 core\n"
-    "out vec4 fragColor;\n"
-    "uniform float time;\n"
-    "void main()\n"
-    "{\n"
-    "    float r = (sin(time) + 1.0) * 0.5;\n"
-    "    float g = (sin(time + 2.0) + 1.0) * 0.5;\n"
-    "    float b = (sin(time + 4.0) + 1.0) * 0.5;\n"
-    "    fragColor = vec4(r, g, b, 1.0);\n"
-    "}\n"
+        "#version 330 core\n"
+        "out vec4 fragColor;\n"
+        "uniform float time;\n"
+        "void main()\n"
+        "{\n"
+        "    float r = (sin(time) + 1.0) * 0.5;\n"
+        "    float g = (sin(time + 2.0) + 1.0) * 0.5;\n"
+        "    float b = (sin(time + 4.0) + 1.0) * 0.5;\n"
+        "    fragColor = vec4(r, g, b, 1.0);\n"
+        "}\n"
                                         );
     shaderProgram->link();
     shaderProgram->bind();
+
+
 }
 
 void TheGrid::resizeGL(int w, int h)
@@ -82,9 +96,9 @@ void TheGrid::paintGL()
     shaderProgram->bind();
 
     // Get elapsed time in seconds
-    static auto startTime = std::chrono::steady_clock::now();
-    auto currentTime = std::chrono::steady_clock::now();
-    float time = std::chrono::duration<float>(currentTime - startTime).count();
+    static auto strt_tme = std::chrono::steady_clock::now();
+    auto crrnt_tme = std::chrono::steady_clock::now();
+    float time = std::chrono::duration<float>(crrnt_tme - strt_tme).count();
 
     // Model matrix: rotate + translate (move back and forth on Z)
     QMatrix4x4 modelMatrix;
@@ -94,8 +108,10 @@ void TheGrid::paintGL()
     float zPos = -3.5f + std::sin(time) * 1.5f;  
     modelMatrix.translate(0.0f, 0.0f, zPos);
 
+    degrees_rotated = std::fmod(360.0f + (degrees_rotated + 2.5f), 360.0f);
+
     // Rotate around Y axis
-    modelMatrix.rotate(time * 50.0f, 0.0f, 1.0f, 0.0f);  // degrees per second
+    modelMatrix.rotate(degrees_rotated, 0.0f, 0.5f, 1.0f);  // degrees/sec
 
     // View matrix: place camera back at Z = 0
     QMatrix4x4 viewMatrix;

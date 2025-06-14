@@ -3,6 +3,7 @@ set(MOC_HEADERS
     ${CMAKE_SOURCE_DIR}/include/tron_traces.hpp
     ${CMAKE_SOURCE_DIR}/include/plugin_renderer.hpp
     ${CMAKE_SOURCE_DIR}/include/the_grid.hpp
+    ${CMAKE_SOURCE_DIR}/include/light_trail.hpp
 )
 
 qt6_wrap_cpp(MOC_SOURCES ${MOC_HEADERS})
@@ -12,6 +13,7 @@ add_library(libtron_traces MODULE
     tron_traces.cpp
     plugin_renderer.cpp
     the_grid.cpp
+    light_trail.cpp
     ${MOC_SOURCES}
 )
 
