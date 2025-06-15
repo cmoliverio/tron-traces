@@ -7,6 +7,8 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLWidget>
 #include <QOpenGLBuffer>
+#include <chrono>
+#include <cmath>
 
 #include "light_trail.hpp"
 
@@ -16,9 +18,11 @@ public:
     TheGrid(QWidget *parent = nullptr);
     ~TheGrid();
     void initialize_light_cycles();
+    void move_light_cycles();
     void initializeGL() override;
     void resizeGL(int w, int h) override;
     void paintGL() override;
+    void updateLineGeometry();
     float degrees_rotated = 0.0f;
     
 private:
@@ -27,6 +31,7 @@ private:
     QOpenGLShaderProgram *shaderProgram;
     QOpenGLShaderProgram *lineShaderProgram;
     QMatrix4x4 projectionMatrix;
+    int lineVertexCount = 0;
 
     std::unique_ptr<std::vector<std::unique_ptr<LightTrail>>> trails;
 };
