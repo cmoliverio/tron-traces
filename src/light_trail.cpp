@@ -24,10 +24,13 @@ void LightTrail::move()
 {
     switch (this->current_direction) {
         case UP:
+            this->current_point[1] += current_speed;
             break;
         case DOWN:
+            this->current_point[1] -= current_speed;
             break;
         case RIGHT:
+            this->current_point[0] += current_speed;
             break;
         case FORWARD:
             break;

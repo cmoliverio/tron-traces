@@ -24,6 +24,14 @@ void TheGrid::initialize_light_cycles()
     this->trails->back()->move();
 }
 
+void TheGrid::move_light_cycles()
+{
+    for(int i = 0; i < this->trails.size(); i++)
+    {
+        this->trails->at(i)->move();
+    }
+}
+
 void TheGrid::initializeGL()
 {
     initialize_light_cycles();
@@ -92,6 +100,8 @@ void TheGrid::resizeGL(int w, int h)
 
 void TheGrid::paintGL()
 {
+    move_light_cycles();
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     shaderProgram->bind();
 

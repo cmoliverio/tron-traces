@@ -5,7 +5,7 @@
 #include <memory>
 #include <array>
 
-typedef std::array<float, 3> Point;
+typedef std::array<float, 3> Point; // x, y, z
 
 enum Direction {
         UP,
